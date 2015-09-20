@@ -1,0 +1,243 @@
+<!-- start: PAGE TITLE -->
+<section id="page-title">
+	<div class="row">
+		<div class="col-sm-8">
+			<h1 class="mainTitle" translate="sidebar.nav.forms.WIZARD_ACTIVO_INFOR">{{ mainTitle }}</h1>
+                        <!--<span class="mainDescription">Activos Informa&acute;tica</span>-->
+		</div>
+		<div ncy-breadcrumb></div>
+	</div>
+</section>
+<!-- end: PAGE TITLE -->
+<!-- start: WIZARD DEMO -->
+<div class="container-fluid container-fullw bg-white">
+	<div class="row">
+		<div class="col-md-12">
+			<!--<h5 class="over-title margin-bottom-15">Wizard <span class="text-bold">demo</span></h5>-->
+			<p>
+				Ingreso de informacion requerida.
+			</p>
+			<!-- /// controller:  'WizardCtrl' -  localtion: assets/js/controllers/wizardCtrl.js /// -->
+<!--			<div ng-controller="SelectCtrl">
+                        </div>-->
+			<div ng-controller="WizardCtrlActivoRenap">
+				<!-- start: WIZARD FORM -->
+				<form name="Form" id="form" novalidate>
+                                    
+<!--                                    <input type="hidden" ng-model="myModel.entity" ng-value="entity" />
+                                    <input type="hidden" ng-model="myModel.action" ng-value="action" />-->
+					<div id="wizard" class="swMain">
+						<!-- start: WIZARD SEPS -->
+						<ul>
+							<li ng-click="form.goTo(Form, 1)">
+								<a href ng-class="{'selected' : currentStep >= 1, 'done' : currentStep > 1}">
+									<div class="stepNumber">
+										1
+									</div>
+									<span class="stepDesc text-small"> Generales </span>
+								</a>
+							</li>
+							<li ng-click="form.goTo(Form, 2)">
+								<a href ng-class="{'selected' : currentStep >= 2, 'done' : currentStep > 2}">
+									<div class="stepNumber">
+										2
+									</div>
+									<span class="stepDesc text-small"> Equipo </span>
+								</a>
+							</li>
+							<li ng-click="form.goTo(Form, 3)">
+								<a href ng-class="{'selected' : currentStep >= 3, 'done' : currentStep > 3}">
+									<div class="stepNumber">
+										3
+									</div>
+									<span class="stepDesc text-small"> Fin </span>
+								</a>
+							</li>
+						</ul>
+						<!-- end: WIZARD SEPS -->
+						<!-- start: WIZARD STEP 1 -->
+						<div id="step-1" ng-show="currentStep == 1">
+							<div class="row">
+<!--								<div class="col-md-5">
+									<div class="padding-30">
+										<h2 class="StepTitle"><i class="ti-face-smile fa-2x text-primary block margin-bottom-10"></i> Enter your personal information</h2>
+										<p>
+											This is an added measure against fraud and to help with billing issues.
+										</p>
+										<p class="text-small">
+											Enter security questions in case you lose access to your account.
+										</p>
+									</div>
+								</div>-->
+								<div class="col-md-15">
+									<fieldset>
+										<legend>
+											Generales
+										</legend>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group" ng-class="{'has-error':Form.cui.$dirty && Form.cui.$invalid, 'has-success':Form.cui.$valid}">
+													<label>
+														CUI <span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Ingrese CUI" class="form-control" name="cui" ng-model="myModel.cui" ng-required="currentStep == 1"/>
+													<span class="error text-small block" ng-if="Form.cui.$dirty && Form.cui.$invalid">CUI Requerido</span>
+													<span class="success text-small" ng-if="Form.cui.$valid">Valido!</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+                                                                                            <div class="form-group">
+                                                                                                        <label>
+														Departamento 
+													</label>
+                                                                                                        <select class="form-control" name="departamento" ng-model="myModel.departamento" 
+                                                                                                                ng-options="c.NOMBRE as c.NOMBRE for c in departamentos " >
+													</select>
+												</div>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group" ng-class="{'has-error':Form.perfilUsuario.$dirty && Form.perfilUsuario.$invalid, 'has-success':Form.perfilUsuario.$valid}">
+													<label>
+														Perfil Usuario<span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Ingrese CUI" class="form-control" name="perfilUsuario" ng-model="myModel.perfilUsuario" ng-required="currentStep == 1"/>
+													<span class="error text-small block" ng-if="Form.perfilUsuario.$dirty && Form.perfilUsuario.$invalid">Perfil es requerido</span>
+													<span class="success text-small" ng-if="Form.perfilUsuario.$valid">Valido!</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group" >
+													<label>
+														Puesto
+													</label>
+													<select class="form-control" name="puesto" ng-model="myModel.puesto">
+                                                                                                            <option value="">&nbsp;</option>
+														<option value="DIR">Director</option>
+														<option value="AUI">Auxiliar Informatica I</option>
+														<option value="SE1">Secretaria 1</option>
+													</select>
+                                                                                                        
+												</div>
+											</div>
+										</div>
+										
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group" ng-class="{'has-error':Form.nombreUsuario.$dirty && Form.nombreUsuario.$invalid, 'has-success':Form.nombreUsuario.$valid}">
+													<label>
+														Nombre Usuario<span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Ingrese Nombre Usuario" class="form-control" name="nombreUsuario" ng-model="myModel.nombreUsuario" ng-required="currentStep == 1"/>
+													<span class="error text-small block" ng-if="Form.nombreUsuario.$dirty && Form.nombreUsuario.$invalid">Nombre usuario requerido</span>
+													<span class="success text-small" ng-if="Form.nombreUsuario.$valid">Valido!</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group" ng-class="{'has-error':Form.oficina.$dirty && Form.oficina.$invalid, 'has-success':Form.oficina.$valid}">
+													<label>
+														Oficina<span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Ingrese Oficina" class="form-control" name="oficina" ng-model="myModel.oficina" ng-required="currentStep == 1"/>
+													<span class="error text-small block" ng-if="Form.oficina.$dirty && Form.oficina.$invalid">Oficina requerido</span>
+													<span class="success text-small" ng-if="Form.oficina.$valid">Valido!</span>
+												</div>
+											</div>
+										</div>
+									</fieldset>
+									
+									<div class="form-group">
+										<button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="form.next(Form)">
+											Siguiente<i class="fa fa-arrow-circle-right"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- end: WIZARD STEP 1 -->
+						<!-- start: WIZARD STEP 2 -->
+						<div id="step-2" ng-show="currentStep == 2">
+							<div class="row">
+								<div class="col-md-15">
+									<fieldset>
+										<legend>
+											Equipo
+										</legend>
+										<div class="form-group" ng-class="{'has-error':Form.nombreEquipo.$dirty && Form.nombreEquipo.$invalid, 'has-success':Form.nombreEquipo.$valid}">
+											<label class="control-label">
+												Nombre Equipo <span class="symbol required"></span>
+											</label>
+											<input type="text" placeholder="Ingrese un Nombre Equipo Valido!" class="form-control" name="nombreEquipo" ng-model="myModel.nombreEquipo" ng-required="currentStep == 2">
+											<span class="error text-small block" ng-if="Form.nombreEquipo.$dirty && Form.nombreEquipo.$error.required">Nombre Equipo Requerido</span>
+											<span class="error text-small block" ng-if="Form.nombreEquipo.$error.nombreEquipo">Por favor ingreso nombre equipo valido.</span>
+											<span class="success text-small" ng-if="Form.nombreEquipo.$valid">Valido!</span>
+										</div>
+                                                                            
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group" ng-class="{'has-error':Form.ip.$dirty && Form.ip.$invalid, 'has-success':Form.ip.$valid}">
+													<label class="control-label">
+														IP <span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Ingrese IP" class="form-control" name="ip" ng-model="myModel.ip" ng-required="currentStep == 2"/>
+													<span class="error text-small block" ng-if="Form.ip.$dirty && Form.ip.$error.required">IP requerido.</span>
+													<span class="success text-small block" ng-if="Form.ip.$valid">!</span>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div class="form-group" ng-class="{'has-error':Form.tipoEquipo.$dirty && Form.tipoEquipo.$invalid, 'has-success':Form.tipoEquipo.$valid}">
+													<label class="control-label">
+														Tipo Equipo <span class="symbol required"></span>
+													</label>
+													<input type="text" placeholder="Ingrese Tipo Equipo" class="form-control" name="tipoEquipo" ng-model="myModel.tipoEquipo" ng-required="currentStep == 2"/>
+													<span class="error text-small block" ng-if="Form.tipoEquipo.$dirty && Form.tipoEquipo.$error.required">Tipo Equipo Requerido.</span>
+													<span class="success text-small block" ng-if="Form.tipoEquipo.$valid">!</span>
+												</div>
+											</div>
+											
+										</div>
+									</fieldset>
+									<div class="form-group">
+										<button class="btn btn-primary btn-o back-step btn-wide pull-left" ng-click="form.prev(Form)">
+											<i class="fa fa-circle-arrow-left"></i> Back
+										</button>
+										<button class="btn btn-primary btn-o next-step btn-wide pull-right" ng-click="form.next(Form)">
+											Next <i class="fa fa-arrow-circle-right"></i>
+										</button>
+									</div>
+								</div>
+							</div>
+						</div>
+                                                
+                                                
+						<!-- end: WIZARD STEP 2 -->
+						<!-- start: WIZARD STEP 3 -->
+						
+						<!-- end: WIZARD STEP 3 -->
+						<!-- start: WIZARD STEP 4 -->
+						<div id="step-3"  ng-show="currentStep == 3"> 
+							<div class="row">
+								<div class="col-md-12">
+									<div class="text-center">
+										<h1 class=" ti-check block text-primary"></h1>
+										<h2 class="StepTitle">Fin.</h2>
+										<p class="text-small">
+										</p>
+                                                                                <a class="btn btn-primary btn-o" href ng-click="form.save(myModel);form.goTo(Form, 1);form.reset()">
+											Guardar 
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- end: WIZARD STEP 4 -->
+					</div>
+					<pre class="code margin-top-20">{{ myModel | json }}</pre>
+				</form>
+				<!-- end: WIZARD FORM -->
+			</div>
+		</div>
+	</div>
+</div>
+<!-- start: WIZARD DEMO -->
