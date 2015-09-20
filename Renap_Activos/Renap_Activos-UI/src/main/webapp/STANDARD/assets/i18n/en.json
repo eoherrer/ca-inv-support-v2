@@ -43,9 +43,49 @@
       "SAVE" : "Save Changes"     
     }  
   },
+  
+  "activobar": {
+    "heading": {
+      "NAVIGATION": "Activos",
+      "FEATURES": "Core Features",
+      "DOCUMENTATION": "Documentation"
+    },
+    "search": {
+      "PLACEHOLDER": "Search..."
+    },
+    "nav": {
+      "activo": {
+      	"MAIN": "Ingreso Activos Informatica"
+      },
+      "element": {
+      	"INGRESO": "Ingreso Activo",
+      	"ASIGNACION": "Asignacion Activo",
+      	"MAIN": "Ingreso Activo",
+        "ELEMENTS": "Elements",
+        "BUTTONS": "Buttons",
+        "LINKS": "Link Effects",
+        "FONTAWESOME" : "Font Awesome Icons",
+        "LINEARICONS" : "Linear Icons",
+        "MODALS" : "Modals",
+        "TOGGLE" : "Toggle",
+        "TABS" : "Tabs & Accordions",
+        "PANELS" : "Panels",
+        "NOTIFICATIONS": "Notifications",
+        "SLIDERS": "Sliders",
+        "TREEVIEW": "TreeView",
+        "MEDIA": "Media",
+        "NESTABLE": "Nestable List",
+        "TYPOGRAPHY": "Typography"
+      }
+    }
+  },
+  
+  
+  
+  
   "sidebar": {
     "heading": {
-      "NAVIGATION": "Main Navigation",
+      "NAVIGATION": "Activos",
       "FEATURES": "Core Features",
       "DOCUMENTATION": "Documentation"
     },
@@ -54,7 +94,7 @@
     },
     "nav": {
       "dashboard": {
-      	"MAIN": "Dashboard"
+      	"MAIN": "Ingreso"
       },
       "element": {
       	"MAIN": "UI Elements",
@@ -85,7 +125,8 @@
         "ELEMENTS": "Form Elements",
         "XEDITABLE": "X-Editable Elements",
         "TEXTEDITOR": "Text Editor",
-        "WIZARD": "Form Wizard",
+        "WIZARD": "Form Wizard1",
+        "WIZARD_ACTIVO_INFOR": "Ingreso Activos Informatica",
         "VALIDATION": "Form Validation",
         "CROPPING": "Image Cropping",
         "UPLOAD": "Multiple File Upload"
