@@ -219,30 +219,14 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
             label: 'Text Editor'
         },
         resolve: loadSequence('ckeditor-plugin', 'ckeditor', 'ckeditorCtrl')
-    }).state('app.form.wizardActivoRenap', {
-        url: '/wizardActivoRenap',
-        templateUrl: "assets/views/form_wizardActivoRenap.html",
+    }).state('app.form.wizard', {
+        url: '/wizard',
+        templateUrl: "assets/views/form_wizard.html",
         title: 'Form Wizard',
         ncyBreadcrumb: {
             label: 'Wizard'
         },
-        resolve: loadSequence('wizardCtrlActivoRenap')
-    }).state('app.form.ingresoActivoRenap', {
-        url: '/wizardIngresoActivoRenap',
-        templateUrl: "assets/views/form_wizardIngresoActivoRenap.html",
-        title: 'Form Wizard',
-        ncyBreadcrumb: {
-            label: 'Wizard'
-        },
-        resolve: loadSequence('wizardIngresoActivoRenap')
-    }).state('app.form.asignacionActivoRenap', {
-        url: '/wizardAsignacionActivoRenap',
-        templateUrl: "assets/views/form_wizardAsignacionActivoRenap.html",
-        title: 'Form Wizard',
-        ncyBreadcrumb: {
-            label: 'Wizard'
-        },
-        resolve: loadSequence('wizardCtrlActivoRenap')
+        resolve: loadSequence('wizardCtrl')
     }).state('app.form.validation', {
         url: '/validation',
         templateUrl: "assets/views/form_validation.html",
@@ -373,8 +357,7 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
         url: '/500',
         templateUrl: "assets/views/utility_500.html",
     })
-    
-    
+
 	// Login routes
 
 	.state('login', {
@@ -394,28 +377,6 @@ function ($stateProvider, $urlRouterProvider, $controllerProvider, $compileProvi
 	    url: '/lock',
 	    templateUrl: "assets/views/login_lock_screen.html"
 	});
-
-//    function WizardCtrlActivoRenapF(){
-//        $scope.departamentos=departamentos;
-//    }
-//    
-//    WizardCtrlActivoRenapF.resolve = {
-//        departamentos: function(Departamento, $q) {
-//          // see: https://groups.google.com/forum/?fromgroups=#!topic/angular/DGf7yyD4Oc4
-//          var deferred = $q.defer();
-//          Departamento.query(function(successData) {
-//                  deferred.resolve(successData); 
-//          }, function(errorData) {
-//                  deferred.reject(); // you could optionally pass error data here
-//          });
-//          return deferred.promise;
-//        },
-//        delay: function($q, $defer) {
-//          var delay = $q.defer();
-//          $defer(delay.resolve, 1000);
-//          return delay.promise;
-//        }
-//      }
 
     // Generates a resolve object previously configured in constant.JS_REQUIRES (config.constant.js)
     function loadSequence() {

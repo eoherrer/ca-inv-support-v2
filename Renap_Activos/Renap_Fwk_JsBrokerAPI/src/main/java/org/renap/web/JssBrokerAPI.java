@@ -76,7 +76,8 @@ public class JssBrokerAPI {
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Path("/switch/query/{entity}/{query}")
-    public Response doCrudOps(@PathParam("action") String name, String entity, String id, InputStream rawBody) {
+    public Response doCrudOps(@PathParam("action") String name, @PathParam("entity") String entity,
+            @PathParam("query") String query, InputStream rawBody) {
         return Response.ok().build();
     }
 

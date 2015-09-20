@@ -18,3 +18,4 @@ nb-configuration.xml
 #bower
 .tmp
 .sass-cache
+/Renap_Activos/Renap_Activos-UI/src/main/webapp/nbproject/private/

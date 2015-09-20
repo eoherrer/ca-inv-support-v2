@@ -36,11 +36,10 @@ app.filter('propsFilter', function () {
     };
 });
 
-//app.controller('SelectCtrl', ["$scope", "$http", "$timeout", function ($scope, $http, $timeout) {
 app.controller('SelectCtrl', ["$scope", "$http", "$timeout", function ($scope, $http, $timeout) {
     $scope.disabled = undefined;
     $scope.searchEnabled = undefined;
-    
+
     $scope.enable = function () {
         $scope.disabled = false;
     };

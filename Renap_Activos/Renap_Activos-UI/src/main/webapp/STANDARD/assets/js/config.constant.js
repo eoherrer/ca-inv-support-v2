@@ -51,9 +51,6 @@ app.constant('JS_REQUIRES', {
         'inboxCtrl': 'assets/js/controllers/inboxCtrl.js',
         'xeditableCtrl': 'assets/js/controllers/xeditableCtrl.js',
         'chatCtrl': 'assets/js/controllers/chatCtrl.js',
-        'wizardCtrlActivoRenap': 'assets/js/controllers/wizardCtrlActivoRenap.js',
-        'wizardIngresoActivoRenap': 'assets/js/controllers/wizardCtrlActivoIngresoRenap.js',
-        'loadDeptosRenap': 'assets/js/controllers/loadDeptosRenap.js',
         
         //*** Filters
         'htmlToPlaintext': 'assets/js/filters/htmlToPlaintext.js'
@@ -130,5 +127,3 @@ app.constant('JS_REQUIRES', {
         files: ['../bower_components/checklist-model/checklist-model.js']
     }]
 });
-
-//add url here like constants
