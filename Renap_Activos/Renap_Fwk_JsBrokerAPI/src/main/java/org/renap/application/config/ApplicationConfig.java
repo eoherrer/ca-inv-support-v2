@@ -29,7 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(org.renap.web.JssBrokerAPI.class);
+        resources.add(org.renap.web.JsBrokerAPI.class);
     }
     
 }
