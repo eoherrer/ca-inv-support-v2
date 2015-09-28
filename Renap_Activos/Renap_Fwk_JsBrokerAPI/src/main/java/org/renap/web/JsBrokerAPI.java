@@ -63,7 +63,9 @@ public class JsBrokerAPI {
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     public Response doRutine(@PathParam("name") String name, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException {
         try {
-            FileReader fr = executor.validateRoutine(ctx.getRealPath(name));
+            System.out.println("name...." + name);
+            System.out.println("name...." + ctx.getRealPath("/WEB-INF/ss.js/"+name));
+            FileReader fr = executor.validateRoutine(ctx.getRealPath("/WEB-INF/ss.js/"+name));
             StringWriter writer = new StringWriter();
             IOUtils.copy(rawBody, writer, "UTF-8");
             String in = writer.toString();
