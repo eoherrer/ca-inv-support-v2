@@ -37,7 +37,7 @@ lib-cov
 coverage
 
 # Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
-.grunt
+Renap_Activos/Renap_Activos-UI/src/main/webapp/.grunt
 
 # node-waf configuration
 .lock-wscript
@@ -47,4 +47,16 @@ build/Release
 
 # Dependency directory
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
-node_modules
+Renap_Activos/Renap_Activos-UI/src/main/webapp/node_modules
+
+Renap_Activos/Renap_Activos-UI/src/main/webapp/node_modules
+Renap_Activos/Renap_Activos-UI/src/main/webapp/npm-debug.log
+
+Renap_Activos/Renap_Activos-UI/src/main/webapp/test/assets/package-*/
+Renap_Activos/Renap_Activos-UI/src/main/webapp/test/assets/temp-*/
+Renap_Activos/Renap_Activos-UI/src/main/webapp/test/reports
+Renap_Activos/Renap_Activos-UI/src/main/webapp/test/tmp/
+
+Renap_Activos/Renap_Activos-UI/src/main/webapp/bower.json
+Renap_Activos/Renap_Activos-UI/src/main/webapp/component.json
+Renap_Activos/Renap_Activos-UI/src/main/webapp/bower_components
