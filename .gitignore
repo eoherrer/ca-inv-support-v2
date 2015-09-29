@@ -48,8 +48,6 @@ build/Release
 # Dependency directory
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 Renap_Activos/Renap_Activos-UI/src/main/webapp/node_modules
-
-Renap_Activos/Renap_Activos-UI/src/main/webapp/node_modules
 Renap_Activos/Renap_Activos-UI/src/main/webapp/npm-debug.log
 
 Renap_Activos/Renap_Activos-UI/src/main/webapp/test/assets/package-*/
