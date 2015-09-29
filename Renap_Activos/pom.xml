@@ -17,6 +17,7 @@
         <module>Renap_Activos_Model</module>
         <module>Renap_Fwk_ModelAPI</module>
         <module>Renap_Fwk_JsBrokerAPI</module>
-    </modules>
+    <module>Renap_Activos_JsBrokerWeb</module>
+  </modules>
     
 </project>
