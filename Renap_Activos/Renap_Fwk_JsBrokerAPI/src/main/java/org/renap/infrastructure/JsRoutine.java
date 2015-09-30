@@ -5,7 +5,7 @@
  */
 package org.renap.infrastructure;
 
-import org.renap.infrastructure.integrations.RemoteDao;
+import org.renap.infrastructure.integrations.RemoteModel;
 import org.renap.infrastructure.integrations.SwitchClient;
 
 /**
@@ -14,5 +14,5 @@ import org.renap.infrastructure.integrations.SwitchClient;
  */
 public interface JsRoutine {
 
-    public String exec(RemoteDao dao, SwitchClient switchClient, Object remote);
+    public String exec(RemoteModel dao, SwitchClient switchClient, Object remote,String objParams);
 }

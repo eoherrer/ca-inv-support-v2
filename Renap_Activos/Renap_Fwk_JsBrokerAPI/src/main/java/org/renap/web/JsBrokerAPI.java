@@ -5,8 +5,8 @@
  */
 package org.renap.web;
 
+import com.google.gson.JsonObject;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -52,6 +52,7 @@ public class JsBrokerAPI {
      * code
      *
      * @param name
+     * @param ctxUri
      * @param rawBody
      * @return
      * @throws org.renap.infrastructure.exceptions.JsRoutineNotExistsException
@@ -61,15 +62,22 @@ public class JsBrokerAPI {
     @Path("/doRutine/{name}")
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response doRutine(@PathParam("name") String name, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException {
+    public Response doRutine(@PathParam("name") String name, @Context UriInfo ctxUri, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException {
         try {
-            System.out.println("name...." + name);
-            System.out.println("name...." + ctx.getRealPath("/WEB-INF/ss.js/"+name));
-            FileReader fr = executor.validateRoutine(ctx.getRealPath("/WEB-INF/ss.js/"+name));
-            StringWriter writer = new StringWriter();
-            IOUtils.copy(rawBody, writer, "UTF-8");
-            String in = writer.toString();
-            final String res = executor.exec(fr, in);
+            String routineFilePath = ctx.getRealPath("/WEB-INF/ss.js/" + name);
+            System.out.println("routine name...." + routineFilePath);
+
+            StringWriter requestBody = new StringWriter();
+            IOUtils.copy(rawBody, requestBody, "UTF-8");
+            JsonObject o = new JsonObject();
+
+            if (ctxUri.getQueryParameters() != null && !ctxUri.getQueryParameters().isEmpty()) {
+                for (String k : ctxUri.getQueryParameters().keySet()) {
+                    o.addProperty(k, ctxUri.getQueryParameters().getFirst(k));
+                }
+            }
+
+            final String res = executor.exec(executor.validateRoutine(routineFilePath), requestBody.toString(), o.toString());
             StreamingOutput stream = new StreamingOutput() {
                 @Override
                 public void write(OutputStream os) throws IOException,
