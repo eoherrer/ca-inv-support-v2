@@ -6,7 +6,7 @@
         <artifactId>Renap_Activos</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    <artifactId>Renap_Fwk_ModelAPI</artifactId>
+    <artifactId>Renap_Fwk_Inventarios_ModelAPI</artifactId>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -67,5 +67,5 @@
             <url>https://repo.spring.io/libs-release</url>
         </pluginRepository>
     </pluginRepositories>
-    
+    <name>Renap_Fwk_Inventarios_ModelAPI</name>
 </project>

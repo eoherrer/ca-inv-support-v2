@@ -7,8 +7,6 @@ package org.renap.infrastructure.integrations;
 
 import java.io.Serializable;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.inject.Named;
 import org.renap.infrastructure.remote.model.RemoteModelClient;
 import org.renap.infrastructure.remote.model.exceptions.DataRestClientError;
 
@@ -23,5 +21,9 @@ public class RemoteModel implements Serializable {
 
     public String doGetEntityRequest(String entity, String id, String page, String size, String sort) throws DataRestClientError {
         return client.doGetEntityRequest(entity, id, page, size, sort);
+    }
+
+    public String doPersistEntityRequest(String entity, String id, String raw, String method) throws DataRestClientError {
+        return client.doPersistEntityRequest(entity, id, raw, method);
     }
 }

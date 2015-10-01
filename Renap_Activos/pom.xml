@@ -14,9 +14,9 @@
     <modules>
         <module>Renap_Activos-ear</module>
         <module>Renap_Activos-UI</module>
-        <module>Renap_Fwk_ModelAPI</module>
         <module>Renap_Fwk_JsBrokerAPI</module>
     <module>Renap_Activos_JsBrokerWeb</module>
-  </modules>
+        <module>Renap_Fwk_Inventarios_ModelAPI</module>
+    </modules>
     
 </project>
