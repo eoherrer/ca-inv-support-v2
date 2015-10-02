@@ -7,6 +7,9 @@ package org.renap.application.config;
 
 import java.util.Set;
 import javax.ws.rs.core.Application;
+import org.renap.infrastructure.exceptions.providers.BaseExceptionMapper;
+import org.renap.infrastructure.exceptions.providers.UnHandledExceptionMapper;
+import org.renap.infrastructure.exceptions.providers.UnknownExceptionMapper;
 
 /**
  *
@@ -23,13 +26,15 @@ public class ApplicationConfig extends Application {
     }
 
     /**
-     * Do not modify addRestResourceClasses() method.
-     * It is automatically populated with
-     * all resources defined in the project.
-     * If required, comment out calling this method in getClasses().
+     * Do not modify addRestResourceClasses() method. It is automatically
+     * populated with all resources defined in the project. If required, comment
+     * out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(org.renap.web.JsBrokerAPI.class);
+        resources.add(BaseExceptionMapper.class);
+        resources.add(UnknownExceptionMapper.class);
+        resources.add(UnHandledExceptionMapper.class);
     }
-    
+
 }

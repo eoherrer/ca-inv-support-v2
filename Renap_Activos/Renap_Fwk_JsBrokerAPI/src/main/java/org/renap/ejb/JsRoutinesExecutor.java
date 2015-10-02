@@ -5,14 +5,15 @@
  */
 package org.renap.ejb;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
 import java.io.StringWriter;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.script.Compilable;
 import javax.script.CompiledScript;
 import javax.script.Invocable;
@@ -21,8 +22,10 @@ import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 import org.apache.commons.io.IOUtils;
 import org.renap.infrastructure.JsRoutine;
+import org.renap.infrastructure.exceptions.BaseException;
 import org.renap.infrastructure.exceptions.JsRoutineFailException;
 import org.renap.infrastructure.exceptions.JsRoutineNotExistsException;
+import org.renap.infrastructure.exceptions.dto.ErrorDto;
 import org.renap.infrastructure.integrations.RemoteModel;
 import org.renap.infrastructure.integrations.SwitchClient;
 
@@ -30,8 +33,9 @@ import org.renap.infrastructure.integrations.SwitchClient;
  *
  * @author edcracken
  */
-@Stateless
-public class JsRoutinesExecutor {
+@Named
+@RequestScoped
+public class JsRoutinesExecutor implements Serializable {
 
     @Inject
     RemoteModel remoteDao;
@@ -40,16 +44,13 @@ public class JsRoutinesExecutor {
 
     public FileReader validateRoutine(String realPath) throws JsRoutineNotExistsException {
         try {
-            if (!new File(realPath).exists()) {
-                throw new JsRoutineNotExistsException();
-            }
             return new FileReader(realPath);
         } catch (FileNotFoundException ex) {
-            throw new JsRoutineNotExistsException();
+            throw new JsRoutineNotExistsException(ex, new ErrorDto("999", "Rutina con path " + realPath + " no ha sido encontrada!"));
         }
     }
 
-    public String exec(FileReader routineFile, String in, String queryParamsObj) throws JsRoutineFailException {
+    public String exec(FileReader routineFile, String in, String queryParamsObj) throws JsRoutineFailException, BaseException {
         try {
             ScriptEngineManager manager = new ScriptEngineManager();
             ScriptEngine engine = manager.getEngineByName("nashorn");
@@ -61,12 +62,12 @@ public class JsRoutinesExecutor {
             JsRoutine jsR = inv.getInterface(JsRoutine.class);
             return jsR.exec(remoteDao, switchClient, in, queryParamsObj);
         } catch (ScriptException ex) {
-            throw new JsRoutineFailException(ex);
+            throw new JsRoutineFailException(ex, new ErrorDto("999", "Error interno en rutina: " + ex.getFileName() + "-" + ex.getColumnNumber() + ":" + ex.getLineNumber() + " - " + ex.getMessage()));
         }
 
     }
 
-    public String exec(InputStream fileContent, String in, String queryParamsObj) throws JsRoutineFailException {
+    public String exec(InputStream fileContent, String in, String queryParamsObj) throws JsRoutineFailException, BaseException {
         try {
             StringWriter writer = new StringWriter();
             IOUtils.copy(fileContent, writer, "UTF-8");
@@ -76,8 +77,10 @@ public class JsRoutinesExecutor {
             Invocable inv = (Invocable) engine.eval(script);
             JsRoutine jsR = inv.getInterface(JsRoutine.class);
             return jsR.exec(remoteDao, switchClient, in, queryParamsObj);
-        } catch (ScriptException | IOException ex) {
-            throw new JsRoutineFailException(ex);
+        } catch (ScriptException ex) {
+            throw new JsRoutineFailException(ex, new ErrorDto("999", "Error interno en rutina: " + ex.getFileName() + "-" + ex.getColumnNumber() + ":" + ex.getLineNumber() + " - " + ex.getMessage()));
+        } catch (IOException ex) {
+            throw new JsRoutineFailException(ex, new ErrorDto("999", "Error al leer contenido masivo de rutina! "));
         }
 
     }

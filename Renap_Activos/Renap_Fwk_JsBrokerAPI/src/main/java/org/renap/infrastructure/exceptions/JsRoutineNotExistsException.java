@@ -5,13 +5,20 @@
  */
 package org.renap.infrastructure.exceptions;
 
+import javax.ws.rs.core.Response;
+import org.renap.infrastructure.exceptions.dto.ErrorDto;
+
 /**
  *
  * @author edcracken
  */
-public class JsRoutineNotExistsException extends Exception {
+public class JsRoutineNotExistsException extends BaseException {
 
-    public JsRoutineNotExistsException() {
+    public JsRoutineNotExistsException(ErrorDto error) {
+        super(Response.Status.METHOD_NOT_ALLOWED, error);
     }
 
+    public JsRoutineNotExistsException(Throwable ex, ErrorDto error) {
+        super(Response.Status.METHOD_NOT_ALLOWED, error);
+    }
 }

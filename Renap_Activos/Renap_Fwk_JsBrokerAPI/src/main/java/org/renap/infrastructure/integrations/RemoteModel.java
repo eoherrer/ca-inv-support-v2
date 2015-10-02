@@ -6,24 +6,28 @@
 package org.renap.infrastructure.integrations;
 
 import java.io.Serializable;
-import javax.ejb.Stateless;
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Named;
 import org.renap.infrastructure.remote.model.RemoteModelClient;
-import org.renap.infrastructure.remote.model.exceptions.DataRestClientError;
+import org.renap.infrastructure.remote.model.exceptions.DataRestClientException;
+import org.renap.infrastructure.remote.model.exceptions.InvalidMethodException;
+import org.renap.infrastructure.remote.model.exceptions.InvalidParametersException;
 
 /**
  *
  * @author edcracken
  */
-@Stateless
+@Named
+@ApplicationScoped
 public class RemoteModel implements Serializable {
 
     RemoteModelClient client = new RemoteModelClient();
 
-    public String doGetEntityRequest(String entity, String id, String page, String size, String sort) throws DataRestClientError {
+    public String doGetEntityRequest(String entity, String id, String page, String size, String sort) throws DataRestClientException {
         return client.doGetEntityRequest(entity, id, page, size, sort);
     }
 
-    public String doPersistEntityRequest(String entity, String id, String raw, String method) throws DataRestClientError {
+    public String doPersistEntityRequest(String entity, String id, String raw, String method) throws DataRestClientException, InvalidParametersException, InvalidMethodException {
         return client.doPersistEntityRequest(entity, id, raw, method);
     }
 }

@@ -5,6 +5,7 @@
  */
 package org.renap.infrastructure;
 
+import org.renap.infrastructure.exceptions.BaseException;
 import org.renap.infrastructure.integrations.RemoteModel;
 import org.renap.infrastructure.integrations.SwitchClient;
 
@@ -14,5 +15,5 @@ import org.renap.infrastructure.integrations.SwitchClient;
  */
 public interface JsRoutine {
 
-    public String exec(RemoteModel dao, SwitchClient switchClient, Object remote,String objParams);
+    public String exec(RemoteModel dao, SwitchClient switchClient, Object remote,String objParams) throws BaseException;
 }

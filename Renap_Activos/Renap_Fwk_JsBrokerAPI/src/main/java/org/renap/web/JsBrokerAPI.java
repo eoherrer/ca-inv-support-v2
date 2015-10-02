@@ -11,10 +11,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.io.Serializable;
 import java.io.StringWriter;
 import java.io.Writer;
-import javax.ejb.EJB;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.servlet.ServletContext;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -31,21 +33,25 @@ import javax.ws.rs.core.StreamingOutput;
 import javax.ws.rs.core.UriInfo;
 import org.apache.commons.io.IOUtils;
 import org.renap.ejb.JsRoutinesExecutor;
+import org.renap.infrastructure.exceptions.BaseException;
 import org.renap.infrastructure.exceptions.JsRoutineFailException;
 import org.renap.infrastructure.exceptions.JsRoutineNotExistsException;
+import org.renap.infrastructure.exceptions.dto.ErrorDto;
+import org.renap.infrastructure.remote.model.exceptions.InvalidParametersException;
 
 /**
  *
  * @author edcracken
  */
-@Stateless
+@Named
+@RequestScoped
 @Path("/v1/jsbroker")
-public class JsBrokerAPI {
+public class JsBrokerAPI implements Serializable {
 
     @Context
     ServletContext ctx;
 
-    @EJB
+    @Inject
     JsRoutinesExecutor executor;
 
     /**
@@ -62,7 +68,7 @@ public class JsBrokerAPI {
     @Path("/media-operations/{name}")
     @Consumes({MediaType.MULTIPART_FORM_DATA})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response doMediaOperation(@PathParam("name") String name, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException {
+    public Response doMediaOperation(@PathParam("name") String name, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException, BaseException {
         return processRutine(name, null, rawBody);
     }
 
@@ -81,7 +87,7 @@ public class JsBrokerAPI {
     @Path("/operations/{name}")
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.APPLICATION_JSON})
-    public Response doPersistOperation(@PathParam("name") String name, @Context UriInfo ctxUri, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException {
+    public Response doPersistOperation(@PathParam("name") String name, @Context UriInfo ctxUri, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException, BaseException {
         return processRutine(name, ctxUri.getQueryParameters(), rawBody);
     }
 
@@ -98,13 +104,16 @@ public class JsBrokerAPI {
     @GET
     @Path("/resources/{name}")
     @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Response doResourceOperation(@PathParam("name") String name, @Context UriInfo ctxUri) throws JsRoutineNotExistsException, JsRoutineFailException {
+    public Response doResourceOperation(@PathParam("name") String name, @Context UriInfo ctxUri) throws JsRoutineNotExistsException, JsRoutineFailException, BaseException {
         return processRutine(name, ctxUri.getQueryParameters(), null);
     }
 
-    private Response processRutine(@PathParam("name") String name, MultivaluedMap<String, String> values, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException {
+    private Response processRutine(@PathParam("name") String name, MultivaluedMap<String, String> values, InputStream rawBody) throws JsRoutineNotExistsException, JsRoutineFailException, BaseException {
         try {
             String routineFilePath = ctx.getRealPath("/WEB-INF/ss.js/" + name);
+            if (routineFilePath == null || routineFilePath.isEmpty()) {
+                throw new InvalidParametersException(new ErrorDto("997", "La rutina no existe en el directorio!"));
+            }
             System.out.println("routine name...." + routineFilePath);
 
             StringWriter requestBody = new StringWriter();
@@ -134,8 +143,7 @@ public class JsBrokerAPI {
             };
             return Response.ok(stream).build();
         } catch (IOException ex) {
-            throw new JsRoutineFailException(ex);
-            //return Response.serverError().status(Response.Status.BAD_REQUEST).entity(new BrokerError()).build();
+            throw new JsRoutineFailException(ex, new ErrorDto("990", "Error procesando rawbody de request"));
         }
     }
 
